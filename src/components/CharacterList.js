@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CharacterCard from "./CharacterCard";
 import styled from "styled-components";
+import SearchForm from "./SearchForm";
 
 const CharacterListSection = styled.section`
+text-align: center;
+`;
+
+const CharacterListDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -12,6 +17,7 @@ const CharacterListSection = styled.section`
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
   const [characters, setCharacters] = useState([]);
+  // console.log(`This is the characters state `, characters);
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
@@ -27,9 +33,25 @@ export default function CharacterList() {
       });
   }, []);
 
+  const [filterTerm, setFilterTerm] = useState("");
+  const [filterResults, setFilterResults] = useState([]);
+  console.log(`This is filterTerm: `, filterTerm);
+
+  useEffect(() => {
+    const results = characters.filter(item =>
+      item.name.toLowerCase().includes(filterTerm.toLowerCase())
+    );
+    setFilterResults(results);
+    console.log(`This is results `, results);
+  }, [filterTerm]);
+  
   return (
     <CharacterListSection>
-      {characters.map(character => {
+      <span>Enter a character's name and see what pops up! 
+        <SearchForm setFilterTerm={setFilterTerm}></SearchForm>
+      </span>
+      <CharacterListDiv>
+      {filterResults.map(character => {
         console.log(`Character is: `, character);
         return (
           <CharacterCard
@@ -40,6 +62,7 @@ export default function CharacterList() {
           />
         );
       })}
+      </CharacterListDiv>
     </CharacterListSection>
   );
 }

@@ -3,6 +3,7 @@ import Header from "./components/Header.js";
 import WelcomePage from "./components/WelcomePage";
 import CharacterList from "./components/CharacterList";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import SearchForm from "./components/SearchForm.js";
 
 export default function App() {
   return (
