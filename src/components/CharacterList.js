@@ -5,7 +5,7 @@ import styled from "styled-components";
 import SearchForm from "./SearchForm";
 
 const CharacterListSection = styled.section`
-text-align: center;
+  text-align: center;
 `;
 
 const CharacterListDiv = styled.div`
@@ -25,7 +25,7 @@ export default function CharacterList() {
     axios
       .get("https://rickandmortyapi.com/api/character/")
       .then(response => {
-        console.log(`Axios.get.then: `, response.data.results);
+        console.log(`axios.get.then: `, response.data.results);
         setCharacters(response.data.results);
       })
       .catch(error => {
@@ -44,24 +44,40 @@ export default function CharacterList() {
     setFilterResults(results);
     console.log(`This is results `, results);
   }, [filterTerm]);
-  
+
   return (
     <CharacterListSection>
-      <span>Enter a character's name and see what pops up! 
+      <span>
+        Enter a character's name and see what their status is!
         <SearchForm setFilterTerm={setFilterTerm}></SearchForm>
       </span>
+      <div>Search Results:</div>
       <CharacterListDiv>
-      {filterResults.map(character => {
-        console.log(`Character is: `, character);
-        return (
-          <CharacterCard
-            props={character}
-            key={character.id}
-            name={character.name}
-            status={character.status}
-          />
-        );
-      })}
+        {filterResults.map(character => {
+          console.log(`Character is: `, character);
+          return (
+            <CharacterCard
+              props={character}
+              key={character.id}
+              name={character.name}
+              status={character.status}
+            />
+          );
+        })}
+      </CharacterListDiv>
+      <div>Character Database:</div>
+      <CharacterListDiv>
+        {characters.map(character => {
+          console.log(`Character is: `, character);
+          return (
+            <CharacterCard
+              props={character}
+              key={character.id}
+              name={character.name}
+              status={character.status}
+            />
+          );
+        })}
       </CharacterListDiv>
     </CharacterListSection>
   );
