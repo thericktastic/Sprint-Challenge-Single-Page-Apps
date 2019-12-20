@@ -6,7 +6,7 @@ import styled from "styled-components";
 const CharacterListSection = styled.section`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between
+  justify-content: space-between;
 `;
 
 export default function CharacterList() {
