@@ -82,6 +82,7 @@ export default function CharacterList() {
 }
 
 
+// test test
 // {      <CharacterListDiv>
 //   {characters.map(character => {
 //     console.log(`Character is: `, character);
