@@ -53,7 +53,7 @@ export default function CharacterList() {
       </span>
       <div>Search Results:</div>
       <CharacterListDiv>
-        {filterResults.map(character => {
+        {filterResults.length > 0 ? filterResults.map(character => {
           console.log(`Character is: `, character);
           return (
             <CharacterCard
@@ -63,22 +63,35 @@ export default function CharacterList() {
               status={character.status}
             />
           );
-        })}
+        }) : characters.map(character => {
+          console.log(`Character is: `, character);
+          return (
+            <CharacterCard
+              props={character}
+              key={character.id}
+              name={character.name}
+              status={character.status}
+            />
+          );
+        }) }
       </CharacterListDiv>
       <div>Character Database:</div>
-      <CharacterListDiv>
-        {characters.map(character => {
-          console.log(`Character is: `, character);
-          return (
-            <CharacterCard
-              props={character}
-              key={character.id}
-              name={character.name}
-              status={character.status}
-            />
-          );
-        })}
-      </CharacterListDiv>
+
     </CharacterListSection>
   );
 }
+
+
+// {      <CharacterListDiv>
+//   {characters.map(character => {
+//     console.log(`Character is: `, character);
+//     return (
+//       <CharacterCard
+//         props={character}
+//         key={character.id}
+//         name={character.name}
+//         status={character.status}
+//       />
+//     );
+//   })}
+// </CharacterListDiv>}}
